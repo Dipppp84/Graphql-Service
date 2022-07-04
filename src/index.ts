@@ -1,31 +1,17 @@
 import {ApolloServer} from "apollo-server";
-import resolvers from "./resolver.js";
-import typeDefs from "./schema.js";
-import context from "./consext.js"
+import resolvers from './resolvers.js';
+import typeDefs from './myTypeDefs.js';
+import myAPI from './myAPI.js';
 
-const server = new ApolloServer({typeDefs, resolvers, context});
+const server = new ApolloServer({
+    typeDefs: typeDefs,
+    resolvers: resolvers,
+    csrfPrevention: true,
+    cache: "bounded",
+    dataSources: () => myAPI
+});
 
-server.listen().then(({ url }) => {
+server.listen().then(({url}) => {
     console.log('Start ' + url);
 });
-/*
-const server = new ApolloServer({
-    typeDefs,
-    resolvers,
-    context: ({ req }) => ({
-        token: req.headers.authorization,
-    }),
-    dataSources: () => ({
-        authAPI: new AuthRestAPIs(),
-        hackioAPI: new HackIORestAPIs(),
-        genextAPI: new GenNextAPIs(),
-    }),
-});
-server.applyMiddleware({ app });
-if (!module.parent) {
-    // global.connection = connection;
-    app.listen({port: process.env.PORT || 3000}, () =>
-        // eslint-disable-next-line no-console
-        logger.info(`🚀 🚀 🚀 🚀  Server ready at http://localhost:3000${server.graphqlPath} 🚀 🚀 🚀 `),
-    );
-}*/
+
