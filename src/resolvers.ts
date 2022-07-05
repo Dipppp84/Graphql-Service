@@ -1,5 +1,7 @@
-import resolvers from './modules/Users/resolver.js';
+import UserRes from './modules/Users/resolver.js';
+import GenreRes from './modules/genres/resolver.js'
 
 export default [
-    resolvers,
+    UserRes,
+    GenreRes,
 ]
