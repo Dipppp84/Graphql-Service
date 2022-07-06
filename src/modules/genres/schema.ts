@@ -23,11 +23,6 @@ export default gql`
         year: Int
     }
 
-    type Delete{
-        acknowledged: Boolean
-        deletedCount: Int
-    }
-
     type Query {
         genres(limit : Int, offset: Int) : Genres!
         genre(id : String!) : Genre

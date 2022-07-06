@@ -1,5 +1,6 @@
 import {RequestOptions, RESTDataSource} from "apollo-datasource-rest";
 import 'dotenv/config';
+import {Items, Delete} from '../../common/commonIntf.js'
 
 export default class GenreAPI extends RESTDataSource {
     constructor() {
@@ -23,7 +24,7 @@ export default class GenreAPI extends RESTDataSource {
         return this.post<Genre>('', genre);
     }
 
-    async deleteGenre(id: string): Promise<{}> {
+    async deleteGenre(id: string): Promise<Delete> {
         return this.delete<Delete>(encodeURIComponent(id));
     }
 
@@ -40,14 +41,6 @@ export interface Genre {
     year: string;
 }
 
-export interface Genres {
-    items: Genre[],
-    limit: string,
-    offset: string,
-    total: number
-}
-
-export interface Delete {
-    acknowledged: boolean,
-    deletedCount: number
+export interface Genres extends Items {
+    items: Genre[];
 }
