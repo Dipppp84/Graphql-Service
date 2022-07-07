@@ -22,7 +22,7 @@ export default {
             return artist;
         },
         deleteArtist: async (parent: any, args: { id: string }, context: { dataSources }) => {
-            return context.dataSources.artistAPI.delete(args.id);
+            return context.dataSources.artistAPI.deleteObj(args.id);
         },
         updateArtist: async (parent: any, args: { id: string, artist: Artist }, context: { dataSources }) => {
             const artist = await context.dataSources.artistAPI.updateArtist(args.id, args.artist);

@@ -1,15 +1,11 @@
-import {RequestOptions, RESTDataSource} from "apollo-datasource-rest";
 import 'dotenv/config';
 import {Items, Delete} from '../../common/commonIntf.js'
+import MyRESTDataSource from "../../common/MyRESTDataSource.js";
 
-export default class GenreAPI extends RESTDataSource {
+export default class GenreAPI extends MyRESTDataSource {
     constructor() {
         super();
         this.baseURL = process.env.GENRES_URL;
-    }
-
-    protected willSendRequest(request: RequestOptions) {
-        request.headers.set('Authorization', this.context.token);
     }
 
     async getGenres(limit: number, offset: number): Promise<Genres> {
@@ -22,10 +18,6 @@ export default class GenreAPI extends RESTDataSource {
 
     async createGenre(genre: Genre): Promise<Genre> {
         return this.post<Genre>('', genre);
-    }
-
-    async deleteGenre(id: string): Promise<Delete> {
-        return this.delete<Delete>(encodeURIComponent(id));
     }
 
     async updateGenre(id: string, genre: Genre): Promise<Genre> {

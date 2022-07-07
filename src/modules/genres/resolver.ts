@@ -22,7 +22,7 @@ export default {
             return genre;
         },
         deleteGenre: async (parent: any, args: { id: string }, context: { dataSources }) => {
-            return context.dataSources.genreAPI.deleteGenre(args.id);
+            return context.dataSources.genreAPI.deleteObj(args.id);
         },
         updateGenre: async (parent: any, args: { id: string, genre: Genre }, context: { dataSources }) => {
             const genre = await context.dataSources.genreAPI.updateGenre(args.id, args.genre);

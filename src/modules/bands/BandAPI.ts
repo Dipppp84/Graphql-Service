@@ -1,15 +1,11 @@
-import {RequestOptions, RESTDataSource} from "apollo-datasource-rest";
 import 'dotenv/config';
 import {Delete, Items} from "../../common/commonIntf.js";
+import MyRESTDataSource from "../../common/MyRESTDataSource.js";
 
-export default class BandAPI extends RESTDataSource {
+export default class BandAPI extends MyRESTDataSource {
     constructor() {
         super();
         this.baseURL = process.env.BANDS_URL;
-    }
-
-    protected willSendRequest(request: RequestOptions) {
-        request.headers.set('Authorization', this.context.token);
     }
 
     async getBands(limit: number, offset: number): Promise<Bands> {
@@ -23,11 +19,6 @@ export default class BandAPI extends RESTDataSource {
 
     async createBand(band: Band): Promise<Band> {
         return this.post<Band>('', band);
-    }
-
-
-    async deleteBand(id: string): Promise<Delete> {
-        return this.delete<Delete>(id);
     }
 
     async updateBand(id: string, band: Band): Promise<Band> {

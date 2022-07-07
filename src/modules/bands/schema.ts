@@ -32,7 +32,7 @@ export default gql`
     }
 
     input MemberInput {
-        artist: String
+        artist: String!
         instrument: String
         years: [String]
     }

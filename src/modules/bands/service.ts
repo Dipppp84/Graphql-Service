@@ -22,5 +22,5 @@ export async function convertBand(band, dataSources): Promise<void> {
 }
 
 export async function setMember(member, dataSources) {
-
+//todo UpdateArtist add instrument
 }

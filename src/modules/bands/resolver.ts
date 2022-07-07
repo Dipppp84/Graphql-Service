@@ -22,7 +22,7 @@ export default {
             return band;
         },
         deleteBand: async (parent: any, args: { id: string }, context: { dataSources }) => {
-            return context.dataSources.bandAPI.deleteBand(args.id);
+            return context.dataSources.bandAPI.deleteObj(args.id);
         },
         updateBand: async (parent: any, args: { id: string, band: Band }, context: { dataSources }) => {
             const band = await context.dataSources.bandAPI.updateBand(args.id, args.band);
