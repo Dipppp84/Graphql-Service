@@ -1,24 +1,5 @@
-import {Genre} from "../genres/GenreAPI.js";
-import {Band} from "./BandAPI";
-
-function getAllGenres(genresIds: string[], dataSources): Array<Promise<Genre>> {
-    const genres = new Array<Promise<Genre>>(genresIds.length)
-    for (let j = 0; j < genresIds.length; j++) {
-        const id = genresIds[j];
-        genres[j] = new Promise<Genre>(async resolve => {
-            const genre = await dataSources.genreAPI.getGenre(id);
-            genre.id = genre._id;
-            resolve(genre);
-        });
-    }
-    return genres;
-}
-
-async function convertBand(band, dataSources): Promise<void> {
-    band.id = band._id;
-    const genres = getAllGenres(band.genresIds, dataSources);
-    band.genres = await Promise.all<Genre>(genres);
-}
+import {Band} from "./BandAPI.js";
+import {convertBand} from "./service.js";
 
 export default {
     Query: {
