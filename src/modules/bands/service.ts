@@ -22,11 +22,14 @@ export async function convertBand(band, dataSources): Promise<void> {
     band.genres = await Promise.all<Genre>(genres);
 }
 
-export async function setMember(member : Member, dataSources): Promise<void> {
-    if (!member.instrument || !member.artist)
-        return;
-    const artist = await dataSources.artistAPI.getArtist(member.artist);
-    artist.instruments.push(member.instrument)
+export async function setMember(members : Member[], dataSources): Promise<void> {
     //todo chek this
-    await dataSources.artistAPI.updateArtist(member.artist, {instruments: artist.instruments});
+    for (let i = 0; i < members.length; i++) {
+        const member = members[i];
+        if (!member.instrument || !member.artist)
+            continue;
+        const artist = await dataSources.artistAPI.getArtist(member.artist);
+        artist.instruments.push(member.instrument)
+        await dataSources.artistAPI.updateArtist(member.artist, {instruments: artist.instruments});
+    }
 }
