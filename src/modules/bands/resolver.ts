@@ -1,5 +1,5 @@
 import {Band} from "./BandAPI.js";
-import {convertBand} from "./service.js";
+import {convertBand, setMember} from "./service.js";
 
 export default {
     Query: {
@@ -18,6 +18,7 @@ export default {
     Mutation: {
         createBand: async (parent: any, args: { band: Band }, context: { dataSources }) => {
             const band = await context.dataSources.bandAPI.createBand(args.band);
+            await setMember(band.membersId, context.dataSources);
             await convertBand(band, context.dataSources);
             return band;
         },
@@ -26,6 +27,7 @@ export default {
         },
         updateBand: async (parent: any, args: { id: string, band: Band }, context: { dataSources }) => {
             const band = await context.dataSources.bandAPI.updateBand(args.id, args.band);
+            await setMember(band.membersId, context.dataSources);
             await convertBand(band, context.dataSources);
             return band;
         },
