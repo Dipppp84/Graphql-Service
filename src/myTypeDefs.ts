@@ -3,6 +3,8 @@ import UserSch from './modules/users/schema.js';
 import GenreSch from './modules/genres/schema.js';
 import BandSch from './modules/bands/schema.js';
 import ArtistSch from './modules/artists/schema.js';
+import TrackSch from './modules/tracks/schema.js';
+
 
 export default [
     commonSch,
@@ -10,4 +12,5 @@ export default [
     GenreSch,
     BandSch,
     ArtistSch,
+    TrackSch,
 ]

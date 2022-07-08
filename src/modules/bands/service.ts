@@ -22,7 +22,6 @@ export async function convertBand(band, dataSources): Promise<void> {
 }
 
 export async function setMember(members : Member[], dataSources): Promise<void> {
-    //todo chek this
     for (let i = 0; i < members.length; i++) {
         const member = members[i];
         if (!member.instrument || !member.artist)
