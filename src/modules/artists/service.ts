@@ -1,7 +1,6 @@
 import {Band} from "../bands/BandAPI.js";
 import {getAllBands} from "../bands/service.js";
-import {Track} from "../tracks/TrackAPI";
-import {convertTrack} from "../tracks/service";
+import {convertTrack} from "../tracks/service.js";
 import {Artist} from "./ArtistAPI";
 
 export function getAllArtists(artistsIds: string[], dataSources): Array<Promise<Artist>> {

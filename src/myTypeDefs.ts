@@ -4,7 +4,7 @@ import GenreSch from './modules/genres/schema.js';
 import BandSch from './modules/bands/schema.js';
 import ArtistSch from './modules/artists/schema.js';
 import TrackSch from './modules/tracks/schema.js';
-
+import AlbumSch from './modules/albums/schema.js';
 
 export default [
     commonSch,
@@ -13,4 +13,5 @@ export default [
     BandSch,
     ArtistSch,
     TrackSch,
+    AlbumSch,
 ]

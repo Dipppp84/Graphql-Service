@@ -5,7 +5,7 @@ import {Items} from "../../common/commonIntf.js";
 export default class TrackAPI extends RESTDataSource {
     constructor() {
         super();
-        this.baseURL = process.env.USERS_URL;
+        this.baseURL = process.env.TRACKS_URL;
     }
 
     async getTracks(limit: number, offset: number): Promise<Tracks> {

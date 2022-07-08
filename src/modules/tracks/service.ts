@@ -5,6 +5,8 @@ import {Band} from "../bands/BandAPI.js";
 import {Genre} from "../genres/GenreAPI.js";
 import {getAllGenres} from "../genres/service.js";
 import {getAllArtists} from "../artists/service.js";
+import {getAllAlbums} from "../albums/service.js";
+import {Album} from "../albums/AlbumAPI.js";
 
 export function getAllTracks(trackIds: string[], dataSources): Array<Promise<Track>> {
     const tracks = new Array<Promise<Track>>(trackIds.length)
@@ -21,8 +23,8 @@ export function getAllTracks(trackIds: string[], dataSources): Array<Promise<Tra
 
 export async function convertTrack(track, dataSources): Promise<void> {
     track.id = track._id;
-    const album = getAllAlbums(track.albumId, dataSources)[0];
-    track.album = await Promise.all<Album>(album);
+    const album = getAllAlbums(track.albumId, dataSources);
+    track.album = (await Promise.all<Album>(album))[0];
 
     const artists = getAllArtists(track.artistsIds, dataSources);
     track.artists = await Promise.all<Artist>(artists);
