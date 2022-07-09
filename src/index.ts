@@ -1,6 +1,5 @@
 import {ApolloServer} from "apollo-server";
-import {RequestOptions } from 'apollo-datasource-rest';
-
+import 'dotenv/config';
 import resolvers from './resolvers.js';
 import typeDefs from './myTypeDefs.js';
 import myAPI from './myAPI.js';
@@ -18,7 +17,8 @@ const server = new ApolloServer({
     dataSources: () => myAPI
 });
 
-server.listen().then(({url}) => {
+const port = process.env.PORT_QL || 4000;
+server.listen({port: port}).then(({url}) => {
     console.log('Start ' + url);
 });
 
