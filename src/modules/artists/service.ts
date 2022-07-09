@@ -8,7 +8,7 @@ export function getAllArtists(artistsIds: string[], dataSources): Array<Promise<
     for (let j = 0; j < artistsIds.length; j++) {
         const id = artistsIds[j];
         artists[j] = new Promise<Artist>(async resolve => {
-            const artist = await dataSources.getArtist(id);
+            const artist = await dataSources.artistAPI.getArtist(id);
             await convertTrack(artist, dataSources)
             resolve(artist);
         });
@@ -19,6 +19,8 @@ export function getAllArtists(artistsIds: string[], dataSources): Array<Promise<
 
 export async function convertArtist(artist, dataSources): Promise<void> {
     artist.id = artist._id;
-    const bands = getAllBands(artist.bandsIds, dataSources);
-    artist.bands = await Promise.all<Band>(bands);
+    if (artist.bandsIds) {
+        const bands = getAllBands(artist.bandsIds, dataSources);
+        artist.bands = await Promise.all<Band>(bands);
+    }
 }

@@ -1,8 +1,9 @@
 import {RESTDataSource} from "apollo-datasource-rest";
 import 'dotenv/config';
 import {Items} from "../../common/commonIntf.js";
+import MyRESTDataSource from "../../common/MyRESTDataSource.js";
 
-export default class AlbumAPI extends RESTDataSource {
+export default class AlbumAPI extends MyRESTDataSource {
     constructor() {
         super();
         this.baseURL = process.env.ALBUMS_URL;

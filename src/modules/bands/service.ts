@@ -17,8 +17,10 @@ export function getAllBands(bandsIds: string[], dataSources): Array<Promise<Band
 
 export async function convertBand(band, dataSources): Promise<void> {
     band.id = band._id;
-    const genres = getAllGenres(band.genresIds, dataSources);
-    band.genres = await Promise.all<Genre>(genres);
+    if (band.genresIds){
+        const genres = getAllGenres(band.genresIds, dataSources);
+        band.genres = await Promise.all<Genre>(genres);
+    }
 }
 
 export async function setMember(members : Member[], dataSources): Promise<void> {

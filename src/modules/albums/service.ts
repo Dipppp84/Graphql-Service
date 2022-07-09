@@ -13,7 +13,7 @@ export function getAllAlbums(albumIds: string[], dataSources): Array<Promise<Alb
     for (let j = 0; j < albumIds.length; j++) {
         const id = albumIds[j];
         albums[j] = new Promise<Album>(async resolve => {
-            const album = await dataSources.getAlbum(id);
+            const album = await dataSources.albumAPI.getAlbum(id);
             await convertAlbum(album, dataSources)
             resolve(album);
         });
@@ -23,16 +23,20 @@ export function getAllAlbums(albumIds: string[], dataSources): Array<Promise<Alb
 
 export async function convertAlbum(album, dataSources): Promise<void> {
     album.id = album._id;
-
-    const artists = getAllArtists(album.artistsIds, dataSources);
-    album.artists = await Promise.all<Artist>(artists);
-
-    const bands = getAllBands(album.bandsIds, dataSources);
-    album.bands = await Promise.all<Band>(bands);
-
-    const tracks = getAllTracks(album.trackIds, dataSources);
-    album.tracks = await Promise.all<Track>(tracks);
-
-    const genres = getAllGenres(album.genresIds, dataSources);
-    album.genres = await Promise.all<Genre>(genres);
+    if (album.artistsIds) {
+        const artists = getAllArtists(album.artistsIds, dataSources);
+        album.artists = await Promise.all<Artist>(artists);
+    }
+    if (album.bandsIds) {
+        const bands = getAllBands(album.bandsIds, dataSources);
+        album.bands = await Promise.all<Band>(bands);
+    }
+    if (album.trackIds) {
+        const tracks = getAllTracks(album.trackIds, dataSources);
+        album.tracks = await Promise.all<Track>(tracks);
+    }
+    if (album.genresIds) {
+        const genres = getAllGenres(album.genresIds, dataSources);
+        album.genres = await Promise.all<Genre>(genres);
+    }
 }

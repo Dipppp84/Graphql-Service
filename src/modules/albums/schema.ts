@@ -29,7 +29,7 @@ export default gql`
     }
 
     type Query {
-        albums(limit : Int, offset: Int) : Album!
+        albums(limit : Int, offset: Int) : Albums!
         album(id : String!) : Album
     }
 

@@ -30,7 +30,7 @@ export default gql`
     }
 
     type Query {
-        tracks(limit : Int, offset: Int) : Track!
+        tracks(limit : Int, offset: Int) : Tracks!
         track(id : String!) : Track
     }
 
