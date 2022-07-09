@@ -16,7 +16,6 @@ export function getAllArtists(artistsIds: string[], dataSources): Array<Promise<
     return artists;
 }
 
-
 export async function convertArtist(artist, dataSources): Promise<void> {
     artist.id = artist._id;
     if (artist.bandsIds) {
