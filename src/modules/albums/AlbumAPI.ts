@@ -1,4 +1,3 @@
-import {RESTDataSource} from "apollo-datasource-rest";
 import 'dotenv/config';
 import {Items} from "../../common/commonIntf.js";
 import MyRESTDataSource from "../../common/MyRESTDataSource.js";

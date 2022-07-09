@@ -4,6 +4,8 @@ import BandRes from './modules/bands/resolver.js';
 import ArtistRes from './modules/artists/resolver.js';
 import TrackRes from './modules/tracks/resolver.js';
 import AlbumRes from './modules/albums/resolver.js';
+import FavouriteRes from './modules/favourites/resolver.js';
+
 
 
 export default [
@@ -13,4 +15,5 @@ export default [
     ArtistRes,
     TrackRes,
     AlbumRes,
+    FavouriteRes
 ]
